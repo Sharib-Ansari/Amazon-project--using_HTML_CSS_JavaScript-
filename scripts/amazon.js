@@ -26,8 +26,11 @@ const products = [//saving the data in a list (array)
     priceCents: 799 
 }];
 
+let productsHTML = ''; // this is called accumulator pattern
+
+// we force it show 2 decimals using toFixed method when we deal with the cost 
 products.forEach((product) => {
-  const generateHtml = `
+  productsHTML += `
     <div class="product-container">
       <div class="product-image-container">
         <img class="product-image"
@@ -45,9 +48,9 @@ products.forEach((product) => {
           ${product.rating.count}
         </div>
       </div>
-
+      
       <div class="product-price">
-        ${product.priceCents*100}
+        ${(product.priceCents / 100).toFixed(2)} 
       </div>
 
       <div class="product-quantity-container">
@@ -77,5 +80,11 @@ products.forEach((product) => {
       </button>
     </div>
   `;
-  console.log(generateHtml);
+
 });
+
+console.log(productsHTML);
+
+document.querySelector('.js-products-grid').
+innerHTML = productsHTML
+
