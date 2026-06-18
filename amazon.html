@@ -45,7 +45,7 @@
 
         <a class="cart-link header-link" href="checkout.html">
           <img class="cart-icon" src="images/icons/cart-icon.png">
-          <div class="cart-quantity">3</div>
+          <div class="cart-quantity js-cart-quantity">0</div>
           <div class="cart-text">Cart</div>
         </a>
       </div>
@@ -56,6 +56,10 @@
       </div>
     </div>
 
-    <script src="scripts/amazon.js"></script>
+    <script src="data/cart.js"></script><!-- this script is for button working(Add to cart) -->
+    
+    <script src="data/products.js"></script> <!-- this folder contain all the data about the products (NOTE: order matters this script section is above amazon.js file okkkk)-->
+
+    <script src="scripts/amazon.js"></script><!-- main working js scripts-->
   </body>
 </html>
