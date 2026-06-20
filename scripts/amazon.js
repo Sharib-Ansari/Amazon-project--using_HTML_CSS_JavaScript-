@@ -55,7 +55,7 @@ products.forEach((product) => {// this will loop through the products.js file ra
         ${(product.priceCents / 100).toFixed(2)} 
       </div>
 
-      <div class="product-quantity-container">                    <select>
+      <div class="product-quantity-container">                    <select class="js-quantity-selector-${product.id}">
           <option selected value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -106,12 +106,19 @@ document.querySelectorAll('.js-add-to-cart')
           matchingItem = item;
         }
        }); 
+        
+       //Adds that selected quantity to the cart instead of always adding 1 feature
+        const quantitySelector = document.querySelector(
+          `.js-quantity-selector-${productId}`
+        );
+        const quantity = Number(quantitySelector.value);
+
        if (matchingItem) {
-        matchingItem.quantity += 1;
+        matchingItem.quantity += quantity;
        } else {
           cart.push({// added to cart by name and quntity
             productId: productId,
-            quantity: 1
+            quantity: quantity
           });
         }
         
