@@ -1,4 +1,5 @@
-const products = [
+// we use modle to use this file in amazon.js by writing (export) at the starting of the file okkkk
+export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",

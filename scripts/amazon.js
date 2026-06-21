@@ -25,8 +25,12 @@
 //     },
 //     priceCents: 799 
 // }];
-
 //Now all the data is taken from the products.js from data folder
+
+import { cart } from "../data/cart.js";//now we use a file out side of this folder. Note 1)put all imports at top of the file, 2) make sure to use a live server
+
+//similarly
+import { products } from "../data/products.js";
 
 let productsHTML = ''; // this is called accumulator pattern
 
