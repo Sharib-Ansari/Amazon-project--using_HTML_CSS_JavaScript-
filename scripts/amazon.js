@@ -27,7 +27,10 @@
 // }];
 //Now all the data is taken from the products.js from data folder
 
-import { cart } from "../data/cart.js";//now we use a file out side of this folder. Note 1)put all imports at top of the file, 2) make sure to use a live server
+import { cart, addToCart } from "../data/cart.js";//now we use a file out side of this folder. Note 1)put all imports at top of the file, 2) make sure to use a live server
+
+//we can also use import * cartModule from "../data/cart.js"; and then 
+// cartModule.cart, cartModule.addTOcart('id')
 
 //similarly
 import { products } from "../data/products.js";
@@ -92,6 +95,19 @@ products.forEach((product) => {// this will loop through the products.js file ra
 //Taking html through DOM 
 document.querySelector('.js-products-grid').
 innerHTML = productsHTML;
+   
+ //fuction for cart quantity interaction
+ function updateCartQuantity(){
+  // make cart quantity interactive
+   let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    });
+
+    //update the result in the page 
+    document.querySelector('.js-cart-quantity')
+      .innerHTML = cartQuantity;
+ };
 
 // adding functionality in Add to cart button by DOM
 document.querySelectorAll('.js-add-to-cart')
@@ -102,42 +118,11 @@ document.querySelectorAll('.js-add-to-cart')
       //data-product-name="${product.name}" this is a html attribut which is used to get the exact element into js
       //button.dataset.productName = to exactly get he name of the product not anything else
       
-        //loop trough an array to check the item exist or not if it is increase by 1 otherwise add to cart
-        let matchingItem;
-
-       cart.forEach((item) =>{
-        if (productId === item.productId){
-          matchingItem = item;
-        }
-       }); 
+        addToCart(productId);//calling a fucntion
         
-       //Adds that selected quantity to the cart instead of always adding 1 feature
-        const quantitySelector = document.querySelector(
-          `.js-quantity-selector-${productId}`
-        );
-        const quantity = Number(quantitySelector.value);
-
-       if (matchingItem) {
-        matchingItem.quantity += quantity;
-       } else {
-          cart.push({// added to cart by name and quntity
-            productId: productId,
-            quantity: quantity
-          });
-        }
+        updateCartQuantity();//calling a fucntion
         
-        // make cart quantity interactive
-
-        let cartQuantity = 0;
-
-        cart.forEach((item) => {
-          cartQuantity += item.quantity;
-        });
-
-        //update the result in the page 
-        document.querySelector('.js-cart-quantity')
-         .innerHTML = cartQuantity;
-         
+     
 
     });
 
