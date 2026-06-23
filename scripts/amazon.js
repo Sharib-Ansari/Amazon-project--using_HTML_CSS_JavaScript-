@@ -35,6 +35,9 @@ import { cart, addToCart } from "../data/cart.js";//now we use a file out side o
 //similarly
 import { products } from "../data/products.js";
 
+//for calcute money
+import { formatCurrency } from "./utils/money.js";
+
 let productsHTML = ''; // this is called accumulator pattern
 
 // we force it show 2 decimals using toFixed method when we deal with the cost 
@@ -59,7 +62,7 @@ products.forEach((product) => {// this will loop through the products.js file ra
       </div>
       
       <div class="product-price">
-        ${(product.priceCents / 100).toFixed(2)} 
+        ${formatCurrency(product.priceCents)} 
       </div>
 
       <div class="product-quantity-container">                    <select class="js-quantity-selector-${product.id}">
