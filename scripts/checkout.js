@@ -1,6 +1,16 @@
 import { cart, removeFromCart } from "../data/cart.js";
 import {products} from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";// double dot is for out side of the folder and single doi is for current folder
+import{hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
+
+import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'// this is called default export method 
+
+hello();
+
+//this fun is used for calculating date 
+const today = dayjs();
+const deliveryDate = today.add(7, 'days');
+console.log(deliveryDate.format('dddd, MMMM D'));
 
 let cartSummaryHTML = '';
 
