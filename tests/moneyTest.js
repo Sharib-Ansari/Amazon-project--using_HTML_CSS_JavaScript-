@@ -1,7 +1,7 @@
 import {formatCurrency} from '../scripts/utils/money.js';
 
 console.log('test suite: formatCurrency')
-
+// there are two types of testing that is 1) manual testing(just check page of website) and 2) automated testing(test code by using code)
 //checking by giving some scenario
 console.log('converts cents into dollars');
 if (formatCurrency(2095) === '20.95'){
