@@ -1,4 +1,4 @@
-import {formatCurrency} from '../scripts/utils/money.js';
+import {formatCurrency} from '../../scripts/utils/money.js';
 
 //we are going to create a test suite using jasmine it initialize by buit in function i.e
 describe('test suite: formatCurrency', () => {
