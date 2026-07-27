@@ -1,11 +1,17 @@
 class Cart{
 
   cartItems = undefined;
-  localStorageKey = undefined;
+  // localStorageKey = undefined;//or we can just write localStorageKey;
+
+  //to make it private so it can only be accessed by the class inside we just write #
+  #localStorageKey;
+
     constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey}
-    loadFromStorage(){
-      this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)); //this is used to change the item back to array 
+      this.#localStorageKey = localStorageKey
+      this.#loadFromStorage();
+    }
+    #loadFromStorage(){
+      this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)); //this is used to change the item back to array 
 
       if(!this.cartItems) {
           this.cartItems = [{
@@ -23,7 +29,7 @@ class Cart{
   };
 
     saveToStorage(){//short hand method
-      localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+      localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     };
 
 
@@ -96,12 +102,7 @@ class Cart{
 const cart = new Cart('cart');
 const businessCart = new Cart('businessCart');
 
-cart.loadFromStorage();
-businessCart.loadFromStorage();
-
-cart.loadFromStorage();
-
-businessCart.loadFromStorage();
 console.log(businessCart);
+console.log(cart);
 
 console.log(businessCart instanceof Cart)//this check if it is an instance of class
