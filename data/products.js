@@ -34,24 +34,29 @@ class Product {
   getPrice(){
     return `${formatCurrency(this.priceCents)}` 
   }
-}
 
-const product1 = new Product({
-    id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-    image: "images/products/athletic-cotton-socks-6-pairs.jpg",
-    name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
-    rating: {
-      stars: 4.5,
-      count: 87
-    },
-    priceCents: 1090,
-    keywords: [
-      "socks",
-      "sports",
-      "apparel"
-    ]
-  });
-;
+  extraInfoHTMl(){
+    return '';
+  }
+}
+// about inheritance and its working 
+class Clothing extends Product{
+   sizeChartLink;
+
+   constructor(productDetails){
+    super(productDetails);// if u wnt to access the method of parent class in child clss we use super keyword
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTMl(){ //(When child class overrides the parent class method)this is called method overiding
+    return `
+      <a href="${this.sizeChartLink}" target="_blank">
+        Size chart 
+      </a>
+    `;
+  }
+
+}
 
 export const products = [
   {
@@ -712,6 +717,11 @@ export const products = [
       "mens"
     ]
   }
-].map((productDetails) => {//.map just modify the elements and create a new array of it 
+].map((productDetails) => {
+  if (productDetails.type === 'clothing') {
+    return new Clothing(productDetails);
+  }
+
+  //.map just modify the elements and create a new array of it 
   return new Product (productDetails);
 });

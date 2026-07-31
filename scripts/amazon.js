@@ -79,6 +79,8 @@ products.forEach((product) => {// this will loop through the products.js file ra
         </select>
       </div>
 
+      ${product.extraInfoHTMl()}
+
       <div class="product-spacer"></div>
 
       <div class="added-to-cart">
