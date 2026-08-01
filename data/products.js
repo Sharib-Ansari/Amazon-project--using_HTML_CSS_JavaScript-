@@ -58,6 +58,43 @@ class Clothing extends Product{
 
 }
 
+/* current date and time 
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleTimeString());
+*/
+
+
+/*
+//some features of this keyword 
+const object2 = {
+  a: 2,
+  b: this.a,// o/p undefine 
+}// if we are inside in method we (use) this to point out to that method buttttttt if we out side of a method if we use this it is undefined bcoz it doesnot have object to point out 
+*/
+
+
+//some more features of this keyword 
+/*
+function logthis(){
+  console.log(this);
+}
+logthis();// o/p undefined
+// but if we use .call(); we can change this to whatever we wnt to do with (this) keyword like setting up values example
+logthis.call('heyyyyyy bby gurl')
+*/
+
+/*
+//important: we generally cant use this keyword with arrow function because it is similar like using this keyword out-side of the method and the out put will be undefined okkkkkkk example
+const object3 = {
+  method: () => {
+    console.log(this); 
+  }
+}
+console.log(object3.method());// o/p undefined
+*/
+
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
