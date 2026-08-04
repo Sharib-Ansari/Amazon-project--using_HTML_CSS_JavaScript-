@@ -33,103 +33,106 @@ import { cart, addToCart } from "../data/cart.js";//now we use a file out side o
 // cartModule.cart, cartModule.addTOcart('id')
 
 //similarly
-import { products } from "../data/products.js";
+import { products, loadProducts } from "../data/products.js";
 
 //for calcute money
 import { formatCurrency } from "./utils/money.js";
 
-let productsHTML = ''; // this is called accumulator pattern
+loadProducts(renderProductsGrid); //loading products from backend
 
-// we force it show 2 decimals using toFixed method when we deal with the cost 
-products.forEach((product) => {// this will loop through the products.js file rather than manually created it
-  productsHTML += `
-    <div class="product-container">
-      <div class="product-image-container">
-        <img class="product-image"
-          src="${product.image}">
-      </div>
+function renderProductsGrid (){
+  let productsHTML = ''; // this is called accumulator pattern
 
-      <div class="product-name limit-text-to-2-lines">
-        ${product.name} 
-      </div>
-
-      <div class="product-rating-container">
-        <img class="product-rating-stars"
-          src="${product.getStarsUrl()}">
-        <div class="product-rating-count link-primary">
-          ${product.rating.count}
+  // we force it show 2 decimals using toFixed method when we deal with the cost 
+  products.forEach((product) => {// this will loop through the products.js file rather than manually created it
+    productsHTML += `
+      <div class="product-container">
+        <div class="product-image-container">
+          <img class="product-image"
+            src="${product.image}">
         </div>
-      </div>
-      
-      <div class="product-price">
-        ${product.getPrice()} 
-      </div>
 
-      <div class="product-quantity-container">                    <select class="js-quantity-selector-${product.id}">
-          <option selected value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-      </div>
+        <div class="product-name limit-text-to-2-lines">
+          ${product.name} 
+        </div>
 
-      ${product.extraInfoHTMl()}
-
-      <div class="product-spacer"></div>
-
-      <div class="added-to-cart">
-        <img src="images/icons/checkmark.png">
-        Added
-      </div>
-
-      <button class="add-to-cart-button button-primary js-add-to-cart"
-      data-product-id="${product.id}">
-        Add to Cart 
-      </button>
-    </div>
-  `;
-
-});
-
-//Taking html through DOM 
-document.querySelector('.js-products-grid').
-innerHTML = productsHTML;
-   
- //fuction for cart quantity interaction
- function updateCartQuantity(){
-  // make cart quantity interactive
-   let cartQuantity = 0;
-    cart.forEach((cartItem) => {
-      cartQuantity += cartItem.quantity;
-    });
-
-    //update the result in the page 
-    document.querySelector('.js-cart-quantity')
-      .innerHTML = cartQuantity;
- };
-
-// adding functionality in Add to cart button by DOM
-document.querySelectorAll('.js-add-to-cart')
-  .forEach((button) => {
-
-    button.addEventListener('click', () => {
-      const productId = button.dataset.productId;
-      //data-product-name="${product.name}" this is a html attribut which is used to get the exact element into js
-      //button.dataset.productName = to exactly get he name of the product not anything else
-      
-        addToCart(productId);//calling a fucntion
+        <div class="product-rating-container">
+          <img class="product-rating-stars"
+            src="${product.getStarsUrl()}">
+          <div class="product-rating-count link-primary">
+            ${product.rating.count}
+          </div>
+        </div>
         
-        updateCartQuantity();//calling a fucntion
-        
-     
+        <div class="product-price">
+          ${product.getPrice()} 
+        </div>
 
-    });
+        <div class="product-quantity-container">                    <select class="js-quantity-selector-${product.id}">
+            <option selected value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+
+        ${product.extraInfoHTMl()}
+
+        <div class="product-spacer"></div>
+
+        <div class="added-to-cart">
+          <img src="images/icons/checkmark.png">
+          Added
+        </div>
+
+        <button class="add-to-cart-button button-primary js-add-to-cart"
+        data-product-id="${product.id}">
+          Add to Cart 
+        </button>
+      </div>
+    `;
 
   });
 
+  //Taking html through DOM 
+  document.querySelector('.js-products-grid').
+  innerHTML = productsHTML;
+    
+  //fuction for cart quantity interaction
+  function updateCartQuantity(){
+    // make cart quantity interactive
+    let cartQuantity = 0;
+      cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+      });
+
+      //update the result in the page 
+      document.querySelector('.js-cart-quantity')
+        .innerHTML = cartQuantity;
+  };
+
+  // adding functionality in Add to cart button by DOM
+  document.querySelectorAll('.js-add-to-cart')
+    .forEach((button) => {
+
+      button.addEventListener('click', () => {
+        const productId = button.dataset.productId;
+        //data-product-name="${product.name}" this is a html attribut which is used to get the exact element into js
+        //button.dataset.productName = to exactly get he name of the product not anything else
+        
+          addToCart(productId);//calling a fucntion
+          
+          updateCartQuantity();//calling a fucntion
+          
+      
+
+      });
+
+    });
+}

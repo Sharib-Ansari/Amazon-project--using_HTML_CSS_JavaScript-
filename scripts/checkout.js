@@ -5,7 +5,12 @@ import {renderPaymentSummary} from "./checkout/paymentSummary.js";
 
 
 //practicing the backend
-import '../data/backend-practice.js'
+//import '../data/backend-practice.js'
 
-renderOrderSummary();
-renderPaymentSummary();
+import { loadProducts } from "../data/products.js";
+loadProducts(() => {
+  renderOrderSummary();
+  renderPaymentSummary();
+
+});
+

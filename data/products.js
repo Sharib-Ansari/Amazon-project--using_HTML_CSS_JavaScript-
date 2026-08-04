@@ -95,6 +95,38 @@ console.log(object3.method());// o/p undefined
 */
 
 
+// loading the product from backend 
+export let products = [];
+
+export function loadProducts(fun) {
+const xhr = new XMLHttpRequest();// creating the request to send to server
+
+//to load the message (response) in console
+xhr.addEventListener('load', () => {
+  //json.parse hlp to convert json into js object or array
+  products = JSON.parse(xhr.response).map((productDetails) => {
+    if (productDetails.type === 'clothing') {
+      return new Clothing(productDetails);
+    }
+
+    //.map just modify the elements and create a new array of it 
+    return new Product (productDetails);
+  });
+
+  console.log('load products');
+
+  fun();
+});
+
+xhr.open('GET', 'https://supersimplebackend.dev/products');
+xhr.send();// sending the request to backend
+};
+
+
+
+/*
+loading the product from file
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -762,3 +794,4 @@ export const products = [
   //.map just modify the elements and create a new array of it 
   return new Product (productDetails);
 });
+*/
